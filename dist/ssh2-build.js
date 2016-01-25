@@ -1224,7 +1224,7 @@ Client.prototype.connect = function(cfg) {
   sock.on('connect', function() {
     debug('DEBUG: Client: Connected');
     self.emit('connect');
-    self._sock.setKeepAlive(true);
+    //self._sock.setKeepAlive(true);
     if (!cfg.sock)
       stream.pipe(sock).pipe(stream);
   }).on('timeout', function() {
@@ -12536,6 +12536,7 @@ Decipher.prototype._final = function () {
 }
 Decipher.prototype.setAutoPadding = function (setTo) {
   this._autopadding = !!setTo
+  return this
 }
 function Splitter () {
   if (!(this instanceof Splitter)) {
@@ -12677,6 +12678,7 @@ Cipher.prototype._final = function () {
 }
 Cipher.prototype.setAutoPadding = function (setTo) {
   this._autopadding = !!setTo
+  return this
 }
 
 function Splitter () {
@@ -15437,6 +15439,7 @@ exports['1.3.132.0.35'] = 'p521'
     var bl9 = b9 & 0x1fff;
     var bh9 = b9 >>> 13;
 
+    out.negative = self.negative ^ num.negative;
     out.length = 19;
     /* k = 0 */
     lo = Math.imul(al0, bl0);
@@ -17424,9 +17427,11 @@ exports['1.3.132.0.35'] = 'p521'
   };
 
   Red.prototype.neg = function neg (a) {
-    var r = a.clone();
-    r.negative ^= 1;
-    return r.iadd(this.m)._forceRed(this);
+    if (a.isZero()) {
+      return a.clone();
+    }
+
+    return this.m.sub(a)._forceRed(this);
   };
 
   Red.prototype.add = function add (a, b) {
@@ -17485,7 +17490,7 @@ exports['1.3.132.0.35'] = 'p521'
   };
 
   Red.prototype.isqr = function isqr (a) {
-    return this.imul(a, a);
+    return this.imul(a, a.clone());
   };
 
   Red.prototype.sqr = function sqr (a) {
@@ -45682,7 +45687,7 @@ module.exports={
   },
   "homepage": "https://github.com/mscdex/ssh2-streams",
   "_id": "ssh2-streams@0.0.21",
-  "_shasum": "4a965f33ee589bf5e2a471200f6b0e9997f2c686",
+  "_shasum": "48c5bfc4c78a2e137720e653fb935888cc94910f",
   "_from": "git://github.com/Crystalnix/ssh2-streams-chrome-app.git#webshell",
   "_resolved": "git://github.com/Crystalnix/ssh2-streams-chrome-app.git#c4545682c542607fd9666248fd1fe72c99904760",
   "_fromGithub": true
