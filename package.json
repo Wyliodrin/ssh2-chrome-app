@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "readable-stream": "~1.0.0",
-    "ssh2-streams": "git@github.com:Crystalnix/ssh2-streams-chrome-app.git#webshell",
+    "ssh2-streams": "git+https://www.github.com/Crystalnix/ssh2-streams-chrome-app.git#webshell",
     "chrome-net": "~3.0.1"
   },
   "scripts": {
