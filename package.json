@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "readable-stream": "~1.0.0",
-    "ssh2-streams": "Wyliodrin/ssh2-streams-chrome-app.git#webshell",
+    "ssh2-streams": "Wyliodrin/ssh2-streams-chrome-app#webshell",
     "chrome-net": "~3.0.1"
   },
   "scripts": {
