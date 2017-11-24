@@ -10,7 +10,7 @@
   "dependencies": {
     "readable-stream": "~1.0.0",
     "ssh2-streams": "git+https://github.com/Wyliodrin/ssh2-streams-chrome-app.git#development",
-    "chrome-net": "~3.0.1"
+    "chrome-net": "~3.3.0"
   },
   "scripts": {
     "test": "node test/test.js"
